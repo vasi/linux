@@ -911,7 +911,9 @@ static int smp_core99_cpu_disable(void)
 
 	mpic_cpu_set_priority(0xf);
 
+#ifdef CONFIG_PPC64
 	cleanup_cpu_mmu_context();
+#endif
 
 	return 0;
 }

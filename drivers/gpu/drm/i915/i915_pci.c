@@ -1044,8 +1044,10 @@ static int i915_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	if (PCI_FUNC(pdev->devfn))
 		return -ENODEV;
 
-	if (!intel_mmio_bar_valid(pdev, intel_info))
+	if (!intel_mmio_bar_valid(pdev, intel_info)) {
+		dev_err(&pdev->dev, "MMIO BAR invalid\n");
 		return -ENXIO;
+	}
 
 	/* Detect if we need to wait for other drivers early on */
 	if (intel_display_driver_probe_defer(pdev))
