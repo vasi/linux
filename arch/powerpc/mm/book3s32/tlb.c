@@ -108,6 +108,9 @@ EXPORT_SYMBOL(hash__flush_tlb_page);
 
 void hash__flush_gather(struct mmu_gather *tlb)
 {
-	hash__flush_range(tlb->mm, tlb->start, tlb->end);
+	if (tlb->fullmm || tlb->need_flush_all)
+		hash__flush_tlb_mm(tlb->mm);
+	else
+		hash__flush_range(tlb->mm, tlb->start, tlb->end);
 }
 EXPORT_SYMBOL(hash__flush_gather);
