@@ -2209,7 +2209,6 @@ static void radeon_reinitialize_M9P(struct radeonfb_info *rinfo)
 }
 #endif
 
-#if 0 /* Not ready yet */
 static void radeon_reinitialize_QW(struct radeonfb_info *rinfo)
 {
 	int i;
@@ -2511,7 +2510,6 @@ static void radeon_reinitialize_QW(struct radeonfb_info *rinfo)
 	cgc |= 0x10000;
 	OUTREG(CUR_OFFSET, 0);
 }
-#endif /* 0 */
 
 #endif /* CONFIG_PPC */
 
@@ -2866,12 +2864,10 @@ void radeonfb_pm_init(struct radeonfb_info *rinfo, int dynclk, int ignore_devlis
 			rinfo->reinit_func = radeon_reinitialize_M10;
 			rinfo->pm_mode |= radeon_pm_off;
 		}
-#if 0 /* Not ready yet */
 		if (!strcmp(rinfo->of_node->name, "ATY,BlueStoneParent")) {
 			rinfo->reinit_func = radeon_reinitialize_QW;
 			rinfo->pm_mode |= radeon_pm_off;
 		}
-#endif
 		if (of_node_name_eq(rinfo->of_node, "ATY,ViaParent")) {
 			rinfo->reinit_func = radeon_reinitialize_M9P;
 			rinfo->pm_mode |= radeon_pm_off;
